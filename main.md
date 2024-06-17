@@ -8,11 +8,13 @@
 
 ---
 
-| Refactoring Timeline | Aufgabe 1| Coding Aufgabe| Recherche |
+| Refactoring Timeline | Arbeit Aufgabe | Coding Aufgabe| Recherche |
 | --- | --- | --- | --- |
 | Kiara | Präsentation | Code Tests | Methoden + Metrik |
-| Kay | Markdown| schlechten Code schreiben | Aufgaben + Ziele |
+| Kay | Markdown | schlechten Code schreiben | Aufgaben + Ziele |
 | Bendiks | IDE Support | Refactoring | Vor-/Nachteile |
+
+---
 
 Aufgaben:
 
