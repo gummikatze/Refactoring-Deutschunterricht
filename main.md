@@ -1,5 +1,7 @@
 # Refactoring
 
+[GitHub Repository](https://github.com/gummikatze/Refactoring-Deutschunterricht)
+
 [Tutorial wie man Markdown nutzt](https://www.markdownguide.org/cheat-sheet/)
 
 [Plugin um Markdown zu nutzen](https://marketplace.visualstudio.com/items?itemName=yzhang.markdown-all-in-one)
@@ -10,9 +12,9 @@
 
 | Refactoring Timeline | Arbeit Aufgabe | Coding Aufgabe| Recherche |
 | --- | --- | --- | --- |
-| Kiara | Präsentation | Code Tests | Methoden + Metrik |
+| Kiara | Präsentation | Code Tests | Methoden + Vor-/Nachteile |
 | Kay | Markdown | schlechten Code schreiben | Aufgaben + Ziele |
-| Bendiks | IDE Support | Refactoring | Vor-/Nachteile |
+| Bendiks | IDE Support | Refactoring + Code Tests  | |
 
 ---
 
