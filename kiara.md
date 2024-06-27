@@ -151,7 +151,7 @@ Wende [Inline Method](#inline-method) an...
 
 #### Wieso anwenden?
 
-Eine Methode, die eine andere Methode, ist grundsätzlich kein Problem. Aber wenn sich dieses System zu tief verschachtelt, geht der Überblick schnell verloren.
+Eine Methode, die eine andere Methode aufruft, ist grundsätzlich kein Problem. Aber wenn sich dieses System zu tief verschachtelt, geht der Überblick schnell verloren.
 
 Oftmals sind Methoden zunächst nicht so kurz, dass man diese mithilfe der [Inline Method](#inline-method) ersetzen kann. Ändert man jedoch das Programm ab, sollte man sich auch immer überlegen, ob es diese Methode wirklich braucht.
 
