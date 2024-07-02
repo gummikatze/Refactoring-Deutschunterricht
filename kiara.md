@@ -80,6 +80,7 @@ Zum Verständnis wird in diesem Dokument immer von Methoden gesprochen. Alles wa
         - [Hier guten Code schreiben](#hier-guten-code-schreiben-7)
       - [Wieso anwenden?](#wieso-anwenden-7)
       - [Vorteile](#vorteile-7)
+      - [Nachteile](#nachteile-2)
       - [Anwendung](#anwendung-7)
     - [Substitute Algorithm](#substitute-algorithm)
       - [Problem](#problem-8)
@@ -88,7 +89,6 @@ Zum Verständnis wird in diesem Dokument immer von Methoden gesprochen. Alles wa
         - [Hier schlechten Code schreiben](#hier-schlechten-code-schreiben-8)
         - [Hier guten Code schreiben](#hier-guten-code-schreiben-8)
       - [Wieso anwenden?](#wieso-anwenden-8)
-      - [Vorteile](#vorteile-8)
       - [Anwendung](#anwendung-8)
 
 ## Composing Methods
@@ -257,11 +257,11 @@ Lokale Variablen werden oft als Teil der [Replace Temp with Query](#replace-temp
 
 #### Problem
 
-
+Das Ergebnis eines Ausdrucks wird in einer lokalen Variable platziert, um später weiterverwendet zu werden.
 
 #### Lösung
 
-
+Schiebe den Ausdruck in eine separate Methode und gib das Ergebnis zurück. Rufe die Methode auf anstelle der Variable.
 
 #### Code
 
@@ -273,141 +273,158 @@ Wende [Replace Temp with Query](#replace-temp-with-query) an...
 
 #### Wieso anwenden?
 
+- Der selbe Ausdruck könnte in verschiedenen Methoden vorkommen.
+- Könnte als Grundlage für [Extract Method](#extract-method) dienen.
 
 #### Vorteile
 
-
+- Es ist einfacher `getBrutto()` zu verstehen, anstelle von `nettoPrice() * 1.19`
+- Ermöglicht Wiederverwendung von Ergebnissen
 
 #### Anwendung
 
-1. 
+1. Stelle sicher dass der Wert der Variable nur einmalig zugewiesen wird.
+2. Nutze die [Extract Method](#extract-method), um den Ausdruck in eine Methode zu packen. Stelle sicher dass sich nur der Wert, nicht der Zustand des Objekts ändert. (Nur Getter, kein Setter)
+3. Ersetze die Variable mit dem Aufruf der neuen Methode.
 
 ---
-
 
 ### Split Temporary Variable
 
 #### Problem
 
-
+Es wird eine lokale Variable `temp` verwendet, um Zwischenergebnisse innerhalb einer Methode zu speichern.
 
 #### Lösung
 
-
+Nutze verschiedene Variablen für verschiedene Werte. Jede Variable sollte nur eine Sache darstellen.
 
 #### Code
 
 ##### Hier schlechten Code schreiben
 
-Wende [](#) an...
+Wende [Split Temporary Variable](#split-temporary-variable) an...
 
 ##### Hier guten Code schreiben
 
 #### Wieso anwenden?
 
+Wenn Änderungen an einer Methode gemacht werden müssen, die von `temp`-Variablen abhängig ist, müsste immer wieder überprüft werden, in welchem Kontext `temp` gerade steht.
 
 #### Vorteile
 
-
+- Jeder Teil eines Programms sollte immer nur für genau eine Sache verantwortlich sein. Dadurch wird es einfacher, Code zu bearbeiten, ohne Angst vor ungewollten Änderungen zu haben.
+- Der Code wird leichter lesbar. Beim Programmieren werden öfters simple Variablennamen wie `v`, `rs` etc. verwendet. Diese Namen sind nicht selbstbeschreibend. Stattdessen sollten Namen wie `carVelocity` oder `rotationSpeed` verwendet werden.
 
 #### Anwendung
 
-1. 
+1. Finde zunächst den Anfang der temporären Variable. Benenne diese entsprechend dem Wert, der ihr zugewiesen wird.
+2. Nutze den neuen Namen an den jeweils relevanten Erstellen.
+3. Wiederhole den Prozess so oft wie nötig
 
 ---
-
 
 ### Remove Assignments to Parameters
 
 #### Problem
 
-
+Einem Parameter wird innerhalb einer Methode ein Wert zugewiesen.
 
 #### Lösung
 
-
+Nutze eine lokale Variable anstelle des Parameters.
 
 #### Code
 
 ##### Hier schlechten Code schreiben
 
-Wende [](#) an...
+Wende [Remove Assignments to Parameters](#remove-assignments-to-parameters) an...
 
 ##### Hier guten Code schreiben
 
 #### Wieso anwenden?
 
+Die Gründe für diese Methode sind die gleichen wie für [Split Temporary Variable](#split-temporary-variable), nur handelt es sich hierbei um einen Parameter statt einer lokalen Variable.
 
 #### Vorteile
 
-
+- Jeder Teil eines Programms sollte immer nur für genau eine Sache verantwortlich sein. Dadurch wird es einfacher, Code zu bearbeiten, ohne Angst vor ungewollten Änderungen zu haben.
 
 #### Anwendung
 
-1. 
+1. Erstelle eine lokale Variable und übergib ihr den Wert des Parameter.
+2. Ersetze die Aufrufe des Parameters durch die Variable.
 
 ---
-
 
 ### Replace Method with Method Object
 
 #### Problem
 
-
+Eine sehr lange Methode besitzt Variablen, die so stark miteinander verwurzelt sind, dass die [Extract Method](#extract-method) nicht anwendbar ist.
 
 #### Lösung
 
-
+Ändere die methode in eine eigene Klasse um, wodurch lokale Variablen durch Klassenfelder ersetzt werden. Dann kann die Methode in mehrere Kleinere aufgeteilt werden.
 
 #### Code
 
 ##### Hier schlechten Code schreiben
 
-Wende [](#) an...
+Wende [Replace Method with Method Object](#replace-method-with-method-object) an...
 
 ##### Hier guten Code schreiben
 
 #### Wieso anwenden?
 
+Eine Methode ist so lang und so kompliziert, dass es schwierig ist, alles voneinander zu trennen. Die Methode in einer Klasse unterzubringen hilft dabei, den Code zu isolieren
 
 #### Vorteile
 
+- Verhindern, dass die Methode noch weiter aufgebläht wird.
+- Ermöglicht es, die Methode in weitere kleinere Methoden aufzuteilen, ohne die Hauptklasse mit Hilfsklassen weiter zu belasten.
 
+#### Nachteile
+
+- Eine weitere Klasse wird hinzugefügt, wodurch das Programm komplexer wird.
 
 #### Anwendung
 
-1. 
+1. Erstelle eine neue Klasse. Benenne sie basierend auf den Nutzen der Methode, die refaktorisiert wird.
+2. In der neuen Klasse, erstelle ein privates Feld mit einer Referenz zu der Klasse, in der die Methode vorher aufzufinden war.
+3. Erstelle ein weiteres privates Feld für jede lokale Variable der Methode.
+4. Erstelle einen Konstruktor, welcher alle Werte als Parameter nimmt.
+5. Erstelle eine neue Methode und kopiere den Originalcode der vorherigen Methode hinein. Ersetze alle lokalen Variablen durch Klassenfelder.
+6. Erstelle ein neues Objekt der neuen Klasse und rufe die neue Methode anstelle der Vorherigen auf.
 
 ---
-
 
 ### Substitute Algorithm
 
 #### Problem
 
-
+Ein Algorithmus soll ersetzt werden.
 
 #### Lösung
 
-
+Ersetze den alten Algorithmus durch den Neuen.
 
 #### Code
 
 ##### Hier schlechten Code schreiben
 
-Wende [](#) an...
+Wende [Substitute Algorithm](#substitute-algorithm) an...
 
 ##### Hier guten Code schreiben
 
 #### Wieso anwenden?
 
-
-#### Vorteile
-
-
+1. Stufenweises Refaktorisieren ist nicht der einzige Weg, ein Programm zu verbessern. Manchmal ist eine Methode so bepackt mit Problemen, dass ein Neuanfang einfach die beste Option ist. Im besten Fall findet man hierbei einen optimierteren Algorithmus, der simpler und/oder effizienter ist.
+2. Die Anforderungen an das Programm ändern sich so stark, dass der bestehende Algorithmus nicht weiterverwendet werden kann.
 
 #### Anwendung
 
-1. 
-
----
+1. Stelle sicher, dass der bestehende Algorithmus so stark vereinfacht ist, wie nur möglich. Entferne unwichtige Teile mithilfe der [Extract Method](#extract-method). Desto kleiner der Algorithmus, desto leichter ist es, diesen zu ersetzen.
+2. Erstelle einen neuen Algorithmus in einer neuen Methode. Ersetze den alten Algorithmus durch den neuen und teste das Programm.
+3. Wenn die Ergebnisse nicht übereinstimmen, wechsle zur vorherigen Implementierung und vergleiche die Ergebnisse. Versuche, den Grund für den Unterschied festzustellen. Es könnte sein, dass es entweder zu einem Fehler im vorherigen Algorithmus kam, oder dass der neue Algorithmus noch nicht ausgereift ist.
+4. Wenn alle Tests korrekt ablaufen, ersetze den alten Algorithmus endgültig.
