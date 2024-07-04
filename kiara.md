@@ -11,8 +11,6 @@ Zum Verständnis wird in diesem Dokument immer von Methoden gesprochen. Alles wa
       - [Problem](#problem)
       - [Lösung](#lösung)
       - [Code](#code)
-        - [Hier schlechten Code schreiben](#hier-schlechten-code-schreiben)
-        - [Hier guten Code schreiben](#hier-guten-code-schreiben)
       - [Wieso anwenden?](#wieso-anwenden)
       - [Vorteile](#vorteile)
       - [Anwendung](#anwendung)
@@ -20,8 +18,6 @@ Zum Verständnis wird in diesem Dokument immer von Methoden gesprochen. Alles wa
       - [Problem](#problem-1)
       - [Lösung](#lösung-1)
       - [Code](#code-1)
-        - [Hier schlechten Code schreiben](#hier-schlechten-code-schreiben-1)
-        - [Hier guten Code schreiben](#hier-guten-code-schreiben-1)
       - [Wieso anwenden?](#wieso-anwenden-1)
       - [Vorteile](#vorteile-1)
       - [Anwendung](#anwendung-1)
@@ -29,8 +25,6 @@ Zum Verständnis wird in diesem Dokument immer von Methoden gesprochen. Alles wa
       - [Problem](#problem-2)
       - [Lösung](#lösung-2)
       - [Code](#code-2)
-        - [Hier schlechten Code schreiben](#hier-schlechten-code-schreiben-2)
-        - [Hier guten Code schreiben](#hier-guten-code-schreiben-2)
       - [Wieso anwenden?](#wieso-anwenden-2)
       - [Vorteile](#vorteile-2)
       - [Nachteile](#nachteile)
@@ -39,8 +33,6 @@ Zum Verständnis wird in diesem Dokument immer von Methoden gesprochen. Alles wa
       - [Problem](#problem-3)
       - [Lösung](#lösung-3)
       - [Code](#code-3)
-        - [Hier schlechten Code schreiben](#hier-schlechten-code-schreiben-3)
-        - [Hier guten Code schreiben](#hier-guten-code-schreiben-3)
       - [Wieso anwenden?](#wieso-anwenden-3)
       - [Vorteile](#vorteile-3)
       - [Nachteile](#nachteile-1)
@@ -49,8 +41,6 @@ Zum Verständnis wird in diesem Dokument immer von Methoden gesprochen. Alles wa
       - [Problem](#problem-4)
       - [Lösung](#lösung-4)
       - [Code](#code-4)
-        - [Hier schlechten Code schreiben](#hier-schlechten-code-schreiben-4)
-        - [Hier guten Code schreiben](#hier-guten-code-schreiben-4)
       - [Wieso anwenden?](#wieso-anwenden-4)
       - [Vorteile](#vorteile-4)
       - [Anwendung](#anwendung-4)
@@ -58,8 +48,6 @@ Zum Verständnis wird in diesem Dokument immer von Methoden gesprochen. Alles wa
       - [Problem](#problem-5)
       - [Lösung](#lösung-5)
       - [Code](#code-5)
-        - [Hier schlechten Code schreiben](#hier-schlechten-code-schreiben-5)
-        - [Hier guten Code schreiben](#hier-guten-code-schreiben-5)
       - [Wieso anwenden?](#wieso-anwenden-5)
       - [Vorteile](#vorteile-5)
       - [Anwendung](#anwendung-5)
@@ -67,8 +55,6 @@ Zum Verständnis wird in diesem Dokument immer von Methoden gesprochen. Alles wa
       - [Problem](#problem-6)
       - [Lösung](#lösung-6)
       - [Code](#code-6)
-        - [Hier schlechten Code schreiben](#hier-schlechten-code-schreiben-6)
-        - [Hier guten Code schreiben](#hier-guten-code-schreiben-6)
       - [Wieso anwenden?](#wieso-anwenden-6)
       - [Vorteile](#vorteile-6)
       - [Anwendung](#anwendung-6)
@@ -76,8 +62,6 @@ Zum Verständnis wird in diesem Dokument immer von Methoden gesprochen. Alles wa
       - [Problem](#problem-7)
       - [Lösung](#lösung-7)
       - [Code](#code-7)
-        - [Hier schlechten Code schreiben](#hier-schlechten-code-schreiben-7)
-        - [Hier guten Code schreiben](#hier-guten-code-schreiben-7)
       - [Wieso anwenden?](#wieso-anwenden-7)
       - [Vorteile](#vorteile-7)
       - [Nachteile](#nachteile-2)
@@ -86,8 +70,6 @@ Zum Verständnis wird in diesem Dokument immer von Methoden gesprochen. Alles wa
       - [Problem](#problem-8)
       - [Lösung](#lösung-8)
       - [Code](#code-8)
-        - [Hier schlechten Code schreiben](#hier-schlechten-code-schreiben-8)
-        - [Hier guten Code schreiben](#hier-guten-code-schreiben-8)
       - [Wieso anwenden?](#wieso-anwenden-8)
       - [Anwendung](#anwendung-8)
 
@@ -105,11 +87,54 @@ Schiebe den Code in eine neue separate Methode und ersetze den Code an der alten
 
 #### Code
 
-##### Hier schlechten Code schreiben
+```py
+from enum import Enum
+
+class Category(Enum):
+    A = 1
+    B = 2
+    C = 3
+
+def calculate_tax(category, income):
+    if category == Category.A:
+        discount = 10
+
+    elif category == Category.B:
+        discount = 5
+
+    else:
+        discount = 0
+
+    return income * (100 - discount) / 100
+```
 
 Wende [Extract Method](#extract-method) an...
 
-##### Hier guten Code schreiben
+```py
+from enum import Enum
+
+class Category(Enum):
+    A = 1
+    B = 2
+    C = 3
+
+def calc_discount(category):
+    if category == Category.A:
+        discount = 10
+
+    elif category == Category.B:
+        discount = 5
+
+    else:
+        discount = 0
+
+    return discount
+
+def calculate_tax(category, income):
+    discount = calc_discount(category)
+    return income * (100 - discount) / 100
+
+```
 
 #### Wieso anwenden?
 
@@ -143,11 +168,20 @@ Ersetze den Aufruf der Methode mit dem Inhalt der Methode und lösche diese.
 
 #### Code
 
-##### Hier schlechten Code schreiben
+```py
+def print_state(self):
+    print("I'm going {} kph!".format(self.speed))
+
+def say_state(self):
+    print_state(self)
+```
 
 Wende [Inline Method](#inline-method) an...
 
-##### Hier guten Code schreiben
+```py
+def say_state(self):
+    print("I'm going {} kph!".format(self.speed))
+```
 
 #### Wieso anwenden?
 
@@ -180,11 +214,35 @@ Setze das Ergebnis, oder Teile dessen, in einzelne Variablen, die sich selbst er
 
 #### Code
 
-##### Hier schlechten Code schreiben
+```py
+def calculate_discounted_price(original_price, discount_percentage, tax_rate):
+    return original_price - (original_price * discount_percentage / 100) + (original_price * tax_rate / 100)
+
+price = 100
+discount = 20
+tax = 8
+
+final_price = calculate_discounted_price(price, discount, tax)
+print(f"The final price is: {final_price}")
+```
 
 Wende [Extract Variable](#extract-variable) an...
 
-##### Hier guten Code schreiben
+```py
+def calculate_discounted_price(original_price, discount_percentage, tax_rate):
+    discount_amount = original_price * discount_percentage / 100
+    discounted_price = original_price - discount_amount
+    tax_amount = discounted_price * tax_rate / 100
+    final_price = discounted_price + tax_amount
+    return final_price
+
+price = 100
+discount = 20
+tax = 8
+
+final_price = calculate_discounted_price(price, discount, tax)
+print(f"The final price is: {final_price}")
+```
 
 #### Wieso anwenden?
 
@@ -227,11 +285,28 @@ Ersetze die Variable durch den Wert selbst.
 
 #### Code
 
-##### Hier schlechten Code schreiben
+```py
+def get_area_of_circle(radius):
+    pi = 3.14159
+    area = pi * radius * radius
+    return area
+
+radius = 5
+area = get_area_of_circle(radius)
+print(f"The area of the circle is: {area}")
+```
 
 Wende [Inline Temp](#inline-temp) an...
 
-##### Hier guten Code schreiben
+```py
+def get_area_of_circle(radius):
+    area = 3.14159 * radius * radius
+    return area
+
+radius = 5
+area = get_area_of_circle(radius)
+print(f"The area of the circle is: {area}")
+```
 
 #### Wieso anwenden?
 
@@ -265,11 +340,29 @@ Schiebe den Ausdruck in eine separate Methode und gib das Ergebnis zurück. Rufe
 
 #### Code
 
-##### Hier schlechten Code schreiben
+```py
+def calculateTotal():
+    basePrice = quantity * itemPrice
+    if basePrice > 1000:
+        return basePrice * 0.95
+
+    else:
+        return basePrice * 0.98
+```
 
 Wende [Replace Temp with Query](#replace-temp-with-query) an...
 
-##### Hier guten Code schreiben
+```py
+def basePrice():
+    return quantity * itemPrice
+
+def calculateTotal():
+    if basePrice() > 1000:
+        return basePrice() * 0.95
+
+    else:
+        return basePrice() * 0.98
+```
 
 #### Wieso anwenden?
 
@@ -301,11 +394,23 @@ Nutze verschiedene Variablen für verschiedene Werte. Jede Variable sollte nur e
 
 #### Code
 
-##### Hier schlechten Code schreiben
+```py
+temp = 2 * (height + width)
+print(temp)
+
+temp = height * width
+print(temp)
+```
 
 Wende [Split Temporary Variable](#split-temporary-variable) an...
 
-##### Hier guten Code schreiben
+```py
+perimeter = 2 * (height + width)
+print(perimeter)
+
+area = height * width
+print(area)
+```
 
 #### Wieso anwenden?
 
@@ -336,11 +441,28 @@ Nutze eine lokale Variable anstelle des Parameters.
 
 #### Code
 
-##### Hier schlechten Code schreiben
+```py
+def square_and_assign(num):
+    num = num ** 2
+    return num
+
+x = 5
+result = square_and_assign(x)
+print(f"The square of {x} is: {result}") # 25
+print(f"x is now: {x}")  # 25!!
+```
 
 Wende [Remove Assignments to Parameters](#remove-assignments-to-parameters) an...
 
-##### Hier guten Code schreiben
+```py
+def square(num):
+    return num ** 2
+
+x = 5
+result = square(x)
+print(f"The square of {x} is: {result}") # 25
+print(f"x is still: {x}")  # 5
+```
 
 #### Wieso anwenden?
 
@@ -369,11 +491,36 @@ Eine sehr lange Methode besitzt Variablen, die so stark miteinander verwurzelt s
 
 #### Code
 
-##### Hier schlechten Code schreiben
+```py
+class Order:
+    # ...
+    def price(self):
+        primaryBasePrice = 0
+        secondaryBasePrice = 0
+        tertiaryBasePrice = 0
+        # ...
+```
 
 Wende [Replace Method with Method Object](#replace-method-with-method-object) an...
 
-##### Hier guten Code schreiben
+```py
+class Order:
+    # ...
+    def price(self):
+        return PriceCalculator(self).compute()
+
+
+class PriceCalculator:
+    def __init__(self, order):
+        self._primaryBasePrice = 0
+        self._secondaryBasePrice = 0
+        self._tertiaryBasePrice = 0
+        # Kopiere relevante Infos vom
+        # `Order` object
+
+    def compute(self):
+        # ...
+```
 
 #### Wieso anwenden?
 
@@ -411,11 +558,36 @@ Ersetze den alten Algorithmus durch den Neuen.
 
 #### Code
 
-##### Hier schlechten Code schreiben
+```py
+def to_uppercase(input_string):
+    result = ""
+
+    for char in input_string:
+        if 'a' <= char <= 'z':
+            result += chr(ord(char) - 32)
+
+        else:
+            result += char
+
+    return result
+
+input_string = "Hello, World!"
+uppercase_string = to_uppercase(input_string)
+print(f"The uppercase string is: {uppercase_string}")
+
+```
 
 Wende [Substitute Algorithm](#substitute-algorithm) an...
 
-##### Hier guten Code schreiben
+```py
+def to_uppercase(input_string):
+    return input_string.upper()
+
+input_string = "Hello, World!"
+uppercase_string = to_uppercase(input_string)
+print(f"The uppercase string is: {uppercase_string}")
+
+```
 
 #### Wieso anwenden?
 
