@@ -12,23 +12,21 @@
 
 | Refactoring Timeline | Arbeit Aufgabe | Coding Aufgabe| Recherche |
 | --- | --- | --- | --- |
-| Kiara | Präsentation | Code Tests | Methoden + Vor-/Nachteile |
-| Kay | Markdown | schlechten Code schreiben | Aufgaben + Ziele |
-| Bendiks | IDE Support | Refactoring + Code Tests  | |
+| Kiara | | Code Tests | Methoden + Vor-/Nachteile |
+| Kay | Dokumentation | Refactoring | Aufgaben + Ziele |
+| Bendiks | IDE Support |  Code Tests  | |
 
 ---
 
 Aufgaben:
 
-- [x] schlechten Code schreiben
+- [x] schlechten Code auftreiben
 - [x] Code Refactoring (Was muss alles geändert werden)
-- [x] Code Tests
-- [x] IDE Support für Refactoring (rename etc)
-- [x] Markdown
+- [ ] Code Tests
+- [ ] IDE Support für Refactoring (rename etc)
+- [x] Dokumentation
 - [x] Recherche
   - [x] Aufgaben
-  - [x] Metrik
   - [x] Ziele
   - [x] Methoden
   - [x] Vor/Nachteile
-- [x] Präsentation
